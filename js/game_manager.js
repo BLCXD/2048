@@ -132,6 +132,14 @@ GameManager.prototype.move = function (direction) {
   var self = this;
 
   if (this.isGameTerminated()) return; // Don't do anything if the game's over
+  if (moved) {
+    this.addRandomTile();
+    if (!this.movesAvailable()) this.over = true;
+    this.actuate();
+    
+    // Add this line to analyze the move
+    setTimeout(() => analyzeMove(direction, this.grid.clone()), 100);
+}
 
   var cell, tile;
 
